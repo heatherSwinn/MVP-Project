@@ -29,12 +29,19 @@ app.get("/exercise", (req, res) => {
 });
 
 app.post("/exercise", (req, res) => {
-    const { userName, workout, duration, date } = req.body;
+    const { username, workout, duration, date } = req.body;
 
     pool.query(
-        `INSERT INTO workouts (name, duration, date) VALUES ($1, $2, $3) RETURNING *`
-        [workout, duration, date]
+        `INSERT INTO users (username) VALUES ($1) ON CONFLICT DO NOTHING`,
+        [username]
     )
+    .then(() => {
+        return pool.query(
+            `INSERT INTO workouts (name, duration, date, id) VALUES ($1, $2, $3, 
+                SELECT id FROM users WHERE username = $4)) RETURNING *`,
+            [workout, duration, date, username]
+        );
+    })
     .then((data) => {
         res.json(data.rows[0]);
     })

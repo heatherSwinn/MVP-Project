@@ -15,7 +15,7 @@ form.addEventListener("submit", (event) => {
     const formData = new FormData(form);
     const exerciseData = {
         userName: formData.get("userName"),
-        exerciseName: formData.get("workout"),
+        workout: formData.get("workout"),
         duration: formData.get("duration"),
         date: formData.get("date"),
     };
