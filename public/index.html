@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Workout Tracker</title>
+    <script defer src="index.js"></script>
 </head>
 <body>
+    <h1>Workout Tracker</h1>
+    
+    <form id="workoutForm">
+        <label for="userName">User Name:</label>
+        <input type="text" id="userName" name="userName" required>
+
+        <label for="workout">Workout:</label>
+        <input type="text" id="workout" name="workout" required>
+
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" id="duration" name="duration" required>
+
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" required data-input>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="exerciseResults"></div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     
 </body>
 </html>
