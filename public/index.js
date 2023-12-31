@@ -3,7 +3,6 @@ const exerciseResults = document.getElementById("exerciseResults");
 
 //initialize flatpickr for the date input
 flatpickr("#date", {
-    enableTime: true,
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Y-m-d",
@@ -43,8 +42,14 @@ function displayExerciseResults() {
         .then((data) => {
             exerciseResults.innerHTML = "";
             data.forEach((exercise) => {
+                //format date
+                const formattedDate = new Date(exercise.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                })
                 const exerciseItem = document.createElement("div");
-                exerciseItem.textContent = `${exercise.name} \n${exercise.duration} minutes \n${exercise.date}`;
+                exerciseItem.textContent = `${exercise.name} \n${exercise.duration} minutes \n${formattedDate}`;
                 exerciseResults.appendChild(exerciseItem);
             });
         })

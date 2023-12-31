@@ -38,7 +38,7 @@ app.post("/exercise", (req, res) => {
     .then(() => {
         return pool.query(
             `INSERT INTO workouts (name, duration, date, id) VALUES ($1, $2, $3, 
-                SELECT id FROM users WHERE username = $4)) RETURNING *`,
+                (SELECT id FROM users WHERE username = $4)) RETURNING *`,
             [workout, duration, date, username]
         );
     })
