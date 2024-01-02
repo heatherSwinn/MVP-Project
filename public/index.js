@@ -50,7 +50,7 @@ function displayExerciseResults() {
                     day: 'numeric',
                 })
                 const exerciseItem = document.createElement("div");
-                exerciseItem.textContent = `Workout: ${exercise.workout_id}\n${exercise.name}\n${exercise.duration} minutes\n${formattedDate}`;
+                exerciseItem.textContent = `Workout: ${exercise.name}\n${exercise.duration} minutes\n${formattedDate}`;
                 
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
@@ -97,3 +97,42 @@ function deleteWorkout(workoutId) {
     });
 }
 
+function updateWorkout(workoutId) {
+    const newName = prompt("Enter the new workout name:");
+    const newDuration = prompt("Enter the new duration as an integer (minutes):");
+    const newDate = prompt("Enter the new date (YYYY-MM-DD):");
+
+    //check that all values were entered
+    if(!newName || !newDuration || !newDate){
+        alert("Please enter all fields to update the workout!");
+        return;
+    }
+
+    const updatedWorkout = {
+        workout: newName,
+        duration: parseInt(newDuration),
+        date: newDate,
+    };
+
+    fetch(`/exercise/${workoutId}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWorkout),
+    })
+
+    .then(res => {
+        if(!res.ok) {
+            throw new Error('OOPS! Network response was not ok');
+        }
+        return res.json();
+    })
+    .then(data => {
+        displayExerciseResults();
+        console.log('Workout updated:', data);
+    })
+    .catch(error => {
+        console.error('Error updating workout: ', error);
+    })
+}

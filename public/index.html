@@ -10,21 +10,21 @@
 <body>
     <h1>Workout Tracker</h1>
     
-    <form id="workoutForm">
+    <div id="workoutForm">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" autocomplete="off" required />
 
         <label for="workout">Workout:</label>
-        <input type="text" id="workout" name="workout" required>
+        <input type="text" id="workout" name="workout" required />
 
         <label for="duration">Duration (minutes):</label>
-        <input type="number" id="duration" name="duration" required>
+        <input type="number" id="duration" name="duration" required />
 
         <label for="date">Date:</label>
-        <input type="text" id="date" name="date" required data-input>
+        <input type="text" id="date" name="date" required data-input />
 
         <button type="submit">Submit</button>
-    </form>
+    </div>
 
     <div id="exerciseResults"></div>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
