@@ -41,6 +41,7 @@ function displayExerciseResults() {
         .then((res) => res.json())
         .then((data) => {
             exerciseResults.innerHTML = "";
+            
             data.forEach((exercise) => {
                 //format date
                 const formattedDate = new Date(exercise.date).toLocaleDateString('en-US', {
@@ -49,7 +50,19 @@ function displayExerciseResults() {
                     day: 'numeric',
                 })
                 const exerciseItem = document.createElement("div");
-                exerciseItem.textContent = `${exercise.name} \n${exercise.duration} minutes \n${formattedDate}`;
+                exerciseItem.textContent = `Workout: ${exercise.workout_id}\n${exercise.name}\n${exercise.duration} minutes\n${formattedDate}`;
+                
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", () => deleteWorkout(exercise.workout_id));
+
+                const patchButton = document.createElement("button");
+                patchButton.textContent = "Modify";
+                patchButton.addEventListener("click", () => updateWorkout(exercise.workout_id));
+
+                exerciseItem.appendChild(deleteButton);
+                exerciseItem.appendChild(patchButton);
+                
                 exerciseResults.appendChild(exerciseItem);
             });
         })
@@ -60,3 +73,27 @@ function displayExerciseResults() {
 
 //initial display of exercises
 displayExerciseResults();
+
+function deleteWorkout(workoutId) {
+    fetch(`/exercise/${workoutId}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ workoutId }),
+    })
+    .then(res => {
+        if(!res.ok) {
+            throw new Error('OOPS! Network response was not ok');
+        }
+        return res.json();
+    })
+    .then(() => {
+        displayExerciseResults();
+        console.log('workout deleted:', data);
+    })
+    .catch(error => {
+        console.error('Error deleting workout: ', error);
+    });
+}
+
