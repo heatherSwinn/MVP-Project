@@ -1,5 +1,6 @@
 const form = document.getElementById("workoutForm");
 const exerciseResults = document.getElementById("exerciseResults");
+const api_url = "https://api.quotable.io/random";
 
 //date selector
 var select = document.getElementById("selectMonth");
@@ -70,6 +71,7 @@ form.addEventListener("submit", (event) => {
     .then((data) => {
         console.log("Submitted exercise:", data);
         displayExerciseResults();
+        return getapi(api_url);
         // getCurrentUsername().then((currentUsername) => {
         //     if (currentUsername) {
         //         displayExerciseResults(currentUsername);
@@ -77,6 +79,9 @@ form.addEventListener("submit", (event) => {
         //         throw new Error("Error getting current username");
         //     }
         // });
+    })
+    .then(() => {
+        console.log("Quote fetched successfully");
     })
     .catch((error) => {
         console.error("Error submitting exercise: ", error);
@@ -231,4 +236,20 @@ function updateWorkout(workoutId) {
     .catch(error => {
         console.error('Error updating workout: ', error);
     })
+}
+
+//generate a random quote
+async function getapi(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+
+        //update the HTML with the quote
+        const quoteContainer = document.getElementById('getQuote');
+        const quote = data.content + ' - ' + data.author;
+        quoteContainer.innerHTML = `<p>${quote}</p>`;
+    } catch (error) {
+        console.error('Error fetching quote:', error);
+    }
 }
