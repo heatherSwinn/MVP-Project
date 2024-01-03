@@ -247,8 +247,8 @@ async function getapi(url) {
 
         //update the HTML with the quote
         const quoteContainer = document.getElementById('getQuote');
-        const quote = data.content + ' - ' + data.author;
-        quoteContainer.innerHTML = `<p>${quote}</p>`;
+        const quote = '\"' + data.content + '\"' + ' - ' + data.author;
+        quoteContainer.innerHTML = `<p>Proud of you! Have some inspiration:\n${quote}</p>`;
     } catch (error) {
         console.error('Error fetching quote:', error);
     }

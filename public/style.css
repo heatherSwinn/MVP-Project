@@ -9,7 +9,7 @@
     font-family: 'Shadows Into Light', cursive;
     margin: 20px auto;
     width: fit-content;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
 }
 
@@ -21,7 +21,7 @@ h2 {
     padding: 10px;
     text-align: center;
     box-sizing: border-box;
-    margin: 10 auto;
+    margin: 5 auto;
     display: block;
 }
 
@@ -65,9 +65,12 @@ body {
   .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 120vh;
     box-sizing: border-box;
+    position: relative;
+
   }
+
   .cd__main{
   display: block !important;
   }
@@ -161,29 +164,30 @@ body {
     cursor: pointer;
   }
 
-  .footer{
-    background-color: aliceblue;
-    font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
-    font-size: xx-small;
-    position: absolute;
-    bottom: 0;
-    right: 18px;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
+  
   #getQuote {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f2f2f2;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    #getQuote p {
+        font-size: 18px;
+        font-style: italic;
+        color: #333;
+        margin: 0;
+    }
 
-#getQuote p {
-    font-size: 18px;
-    font-style: italic;
-    color: #333;
-    margin: 0;
-}
+    .footer{
+      background-color: aliceblue;
+      font-family: 'Lucida Grande', Tahoma, Verdana, sans-serif;
+      font-size: xx-small;
+      position: absolute;
+      bottom: 0;
+      right: 18px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
