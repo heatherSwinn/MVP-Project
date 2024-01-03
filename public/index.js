@@ -41,7 +41,7 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
-    const userName = formData.get("userName");
+    // const userName = formData.get("userName");
     const workout = formData.get("workout");
     const duration = formData.get("duration");
     const selectedMonth = document.getElementById("selectMonth").value;
@@ -52,7 +52,7 @@ form.addEventListener("submit", (event) => {
     const date = `${selectedYear}-${selectedMonth}-${selectedDay}`;
 
     const exerciseData = {
-        userName,
+        // userName,
         workout,
         duration,
         date,
@@ -94,6 +94,7 @@ function displayExerciseResults() {
         .then((data) => {
             exerciseResults.innerHTML = "";
 
+            console.log(data);
             data
                 // .filter((exercise) => exercise.username === currentUsername)
                 .forEach((exercise) => {
@@ -105,7 +106,7 @@ function displayExerciseResults() {
                     });
 
                     const exerciseItem = document.createElement("div");
-                    exerciseItem.textContent = `Workout: ${exercise.name}\n${exercise.duration} minutes\n${formattedDate}`;
+                    exerciseItem.textContent = ` > ${exercise.name} for ${exercise.duration} minutes on ${formattedDate}    `;
 
                     const deleteButton = document.createElement("button");
                     deleteButton.textContent = "Delete";

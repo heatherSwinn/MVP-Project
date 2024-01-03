@@ -19,9 +19,10 @@ app.use(express.json());
 
 //get route to show data
 app.get("/exercise", (req, res) => {
+    //JOIN USER AND WORKOUTS TABLE THEN FILTER
     pool.query(`SELECT * FROM workouts`)
         .then((data) => {
-            res.json(data.rows);
+            res.send(data.rows);
         })
         .catch((error) => {
             console.error("Error fetching exercises: ", error);
